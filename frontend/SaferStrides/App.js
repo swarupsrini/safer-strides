@@ -41,7 +41,7 @@ export default class App extends Component {
         case 3:
             return (<MapHeat />);
         case 4:
-			return (<FilterPage />);
+            return (<FilterPage nextPage={this.changePage}/>);
     }
 
     // return (

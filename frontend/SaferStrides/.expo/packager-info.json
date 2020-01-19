@@ -1,9 +1,17 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
+<<<<<<< HEAD
   "packagerPort": 19001,
   "packagerPid": 10292,
   "expoServerNgrokUrl": "https://rz-n2q.anonymous.saferstrides.exp.direct",
   "packagerNgrokUrl": "https://packager.rz-n2q.anonymous.saferstrides.exp.direct",
   "ngrokPid": 21720
+=======
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": "https://e6-qvb.anonymous.saferstrides.exp.direct",
+  "packagerNgrokUrl": "https://packager.e6-qvb.anonymous.saferstrides.exp.direct",
+  "ngrokPid": 34000
+>>>>>>> 333d99586df890f2e6e13516e2480246aee46ee5
 }
