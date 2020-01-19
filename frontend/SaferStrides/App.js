@@ -15,8 +15,8 @@ import MapHeat from './pages/MapHeat';
 // const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
+	constructor(props) {
+		super(props);
 
     this.state = {
         step: 2,
