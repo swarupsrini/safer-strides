@@ -27,7 +27,7 @@ class TermsAndConditions extends Component{
                 }
               }}
             >
-                <Text style={styles.tcP}>Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern [business name]’s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.</Text>
+                <Text style={styles.tcP}>Welcome to SaferStrider. </Text>
                 <Text style={styles.tcP}>The term 'SaferStrider’ or ‘us’ or ‘we’ refers to the owner of the website whose registered office is [address]. Our company registration number is [company registration number and place of registration]. The term ‘you’ refers to the user or viewer of our website.</Text>
                     <Text style={styles.tcL}>{'\u2022'} The content of the pages of this website is for your general information and use only. It is subject to change without notice.</Text>
                     <Text style={styles.tcL}>{'\u2022'} This website uses cookies to monitor browsing preferences. If you do allow cookies to be used, the following personal information may be stored by us for use by third parties: [insert list of information].</Text>
@@ -41,7 +41,7 @@ Unauthorised use of this website may give rise to a claim for damages and/or be 
                 <Text style={styles.tcP}>The use of this website is subject to the following terms of use</Text>
             </ScrollView>
 
-            <TouchableOpacity disabled={ !this.state.accepted } onPress={  } style={ this.state.accepted ? styles.button : styles.buttonDisabled }><Text style={styles.buttonLabel}>Accept</Text></TouchableOpacity>
+            <TouchableOpacity disabled={ !this.state.accepted } onPress={ () => this.props.nextPage(2) } style={ this.state.accepted ? styles.button : styles.buttonDisabled }><Text style={styles.buttonLabel}>I accept</Text></TouchableOpacity>
       </View>
     );
   }

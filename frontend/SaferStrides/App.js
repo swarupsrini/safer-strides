@@ -19,7 +19,7 @@ export default class App extends Component {
 		super(props);
 
     this.state = {
-        step: 2,
+        step: 1,
     //   region: {
     //     latitude: LATITUDE,
     //     longitude: LONGITUDE,
@@ -34,14 +34,14 @@ export default class App extends Component {
 
   changePage = (step) => {
       this.setState({step: step});
-      print(this.state);
+      console.log(this.state);
   }
 
   render() {
     const { step } = this.state;
     switch(step) {
         case 1:
-            return (<Terms changePage={this.changePage}/>);
+            return (<Terms nextPage={this.changePage}/>);
         case 2:
             return (<MapStreetView />);
         case 3:
