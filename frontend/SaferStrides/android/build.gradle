@@ -36,6 +36,15 @@ allprojects {
     }
 }
 
+ext {
+    compileSdkVersion   = xxx
+    targetSdkVersion    = xxx
+    buildToolsVersion   = "xxx"
+    minSdkVersion       = xxx
+    supportLibVersion   = "xxx"
+    playServicesVersion = "xxx" // or set latest version
+    androidMapsUtilsVersion = "xxx"
+}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.7'
