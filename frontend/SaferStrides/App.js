@@ -9,14 +9,16 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component {
+
   sendUserLocation = () => {
     console.log('Pressed button')
   }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <GetLocationButton onGetLocation={} />
+        <GetLocationButton onGetLocation={this.sendUserLocation} />
         <Text style={styles.instructions}>{instructions}</Text>
       </View>
     );

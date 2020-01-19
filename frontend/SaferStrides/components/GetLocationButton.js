@@ -3,6 +3,8 @@ import { Button } from 'react-native';
 
 const GetLocation = props => {
     return (
-        <Button title = "Send Location" onPress={props.onGetLocation}/>
+        <Button title = "Send Location" onPress={props.onGetLocation} />
     );
 }
+
+export default GetLocation;
