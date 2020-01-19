@@ -4,6 +4,7 @@ import Terms from './pages/Terms';
 import MapStreetView from './pages/MapStreetView';
 import MapHeat from './pages/MapHeat';
 import FilterPage from './pages/FilterPage';
+// import SearchComponent from './pages/SearchComponent';
 
 // import GetLocationButton from './pages/GetLocationButton';
 // import MapView from 'react-native-maps';
@@ -16,22 +17,14 @@ import FilterPage from './pages/FilterPage';
 // const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export default class App extends Component {
+
 	constructor(props) {
 		super(props);
 
     this.state = {
         step: 1,
-    //   region: {
-    //     latitude: LATITUDE,
-    //     longitude: LONGITUDE,
-    //     latitudeDelta: LATITUDE_DELTA,
-    //     longitudeDelta: LONGITUDE_DELTA,
-    //   },
     };
   }
-//   sendUserLocation = () => {
-//     console.log('Pressed button')
-//   }
 
   changePage = (step) => {
       this.setState({step: step});
@@ -48,7 +41,7 @@ export default class App extends Component {
         case 3:
             return (<MapHeat />);
         case 4:
-            return (<FilterPage />);
+			return (<FilterPage />);
     }
 
     // return (

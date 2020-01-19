@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Dimensions, StatusBar, Button } from 'react-native';
 import FilterPage from './FilterPage';
+import SearchBar from 'react-native-searchbar';
 
-import MapView, {
-  Circle
-} from 'react-native-maps';
+import MapView, { Circle } from 'react-native-maps';
 
-import Filter from '../components/Filter';
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width/height ;
 const LATITUDE = 43.651070;
@@ -20,7 +18,29 @@ const circle = {
   },
   radius: 700,
 };
-
+const items = [
+  1337,
+  'janeway',
+  {
+    lots: 'of',
+    different: {
+      types: 0,
+      data: false,
+      that: {
+        can: {
+          be: {
+            quite: {
+              complex: {
+                hidden: [ 'gold!' ],
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  [ 4, 2, 'tree' ],
+];
 
 export default class MapStreetView extends Component {
     constructor(props) {
@@ -55,12 +75,18 @@ export default class MapStreetView extends Component {
               strokeWidth={2}
               />
             </MapView>
+            <SearchBar
+  ref={(ref) => this.searchBar = ref}
+  data={items}
+  handleResults={this._handleResults}
+  showOnLoad
+/>
             
             <View style={styles.optionsButton}>
               <Button title="Options" onPress={() => this.props.nextPage(4)}></Button>
             </View>
 
-            <FilterPage > </FilterPage>
+            {/* <FilterPage > </FilterPage> */}
             {/* <Filter /> */}
             
             {/* <Text style={styles.welcome}>Welcome to React Native!</Text> */}
@@ -84,7 +110,7 @@ export default class MapStreetView extends Component {
           position: 'absolute',
           bottom: 0,
           right: 0,
-          top: 30,
+          top: 65,
         }
       }
       );
