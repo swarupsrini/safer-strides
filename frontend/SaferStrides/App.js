@@ -38,11 +38,11 @@ export default class App extends Component {
   }
 
   render() {
-      return (<MapStreetView />)
+    //   return (<MapStreetView />)
     // const { step } = this.state;
     // switch(step) {
     //     case 1:
-    //         return (<Terms changePage={this.changePage}/>);
+            return (<Terms changePage={this.changePage}/>);
     //     case 2:
     //         return (<MapStreetView />);
     //     case 3:
