@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Platform, StyleSheet, Text, View, Dimensions } from 'react-native';
 // import GetLocationButton from './pages/GetLocationButton';
 import MapView from 'react-native-maps';
 
@@ -43,3 +43,14 @@ export default class MapStreetView extends Component {
         );
       }
     }
+
+const styles = StyleSheet.create({
+  scrollview: {
+    alignItems: 'center',
+    paddingVertical: 40,
+  },
+  map: {
+    width: width,
+    height: height,
+  },
+});
