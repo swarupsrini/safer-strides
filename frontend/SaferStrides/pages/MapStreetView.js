@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Dimensions, StatusBar } from 'react-native';
-// import GetLocationButton from './pages/GetLocationButton';
+import { Platform, StyleSheet, Text, View, Dimensions, StatusBar, Button } from 'react-native';
+import FilterPage from './FilterPage';
+
 import MapView, {
   Circle
 } from 'react-native-maps';
-// import Filter from '../components/Filter'
 
+import Filter from '../components/Filter';
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width/height ;
 const LATITUDE = 43.651070;
@@ -36,7 +37,7 @@ export default class MapStreetView extends Component {
     render() {
         return (
             <View>
-            {/* <MapView
+            <MapView
                 provider={this.props.provider}
                 style={styles.map}
                 scrollEnabled={true}
@@ -54,6 +55,12 @@ export default class MapStreetView extends Component {
               strokeWidth={2}
               />
             </MapView>
+            
+            <View style={styles.optionsButton}>
+              <Button title="Options" onPress={() => this.props.nextPage(4)}></Button>
+            </View>
+
+            <FilterPage > </FilterPage>
             {/* <Filter /> */}
             
             {/* <Text style={styles.welcome}>Welcome to React Native!</Text> */}
@@ -70,4 +77,14 @@ export default class MapStreetView extends Component {
             height: height,
             top: StatusBar.currentHeight,
         },
-      });
+
+        optionsButton:{
+          width: 100,
+          height: 10,
+          position: 'absolute',
+          bottom: 0,
+          right: 0,
+          top: 30,
+        }
+      }
+      );

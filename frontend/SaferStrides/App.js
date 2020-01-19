@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Terms from './pages/Terms';
 import MapStreetView from './pages/MapStreetView';
 import MapHeat from './pages/MapHeat';
+import FilterPage from './pages/FilterPage';
 
 // import GetLocationButton from './pages/GetLocationButton';
 // import MapView from 'react-native-maps';
@@ -43,9 +44,11 @@ export default class App extends Component {
         case 1:
             return (<Terms nextPage={this.changePage}/>);
         case 2:
-            return (<MapStreetView />);
+            return (<MapStreetView nextPage={this.changePage}/>);
         case 3:
             return (<MapHeat />);
+        case 4:
+            return (<FilterPage />);
     }
 
     // return (
