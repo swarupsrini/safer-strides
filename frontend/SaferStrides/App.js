@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
+import GetLocationButton from './components/GetLocationButton';
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -7,11 +9,14 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component {
+  sendUserLocation = () => {
+    console.log('Pressed button')
+  }
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
+        <GetLocationButton onGetLocation={} />
         <Text style={styles.instructions}>{instructions}</Text>
       </View>
     );
