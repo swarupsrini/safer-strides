@@ -1,21 +1,21 @@
-import PropTypes from 'prop-types';
+//import ToggleSwitch from 'toggle-switch-react-native';
 import React, {Component} from 'react';
 import {ScrollView, Text, View, StyleSheet} from 'react-native';
+import ToggleSwitch from 'toggle-switch-react-native';
 
 export default class Filter extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+Control+Z for dev menu
-        </Text>
+        <ToggleSwitch
+            isOn={false}
+            onColor="green"
+            offColor="red"
+            label="Example label"
+            labelStyle={{ color: "black", fontWeight: "900" }}
+            size="large"
+            onToggle={isOn => console.log("changed to : ", isOn)}
+        />
       </View>
     );
   }

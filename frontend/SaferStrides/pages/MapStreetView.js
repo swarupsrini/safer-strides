@@ -60,7 +60,7 @@ export default class MapStreetView extends Component {
               <Button title="Options" onPress={() => this.props.nextPage(4)}></Button>
             </View>
 
-            <FilterPage > </FilterPage>
+            {/* <FilterPage > </FilterPage> */}
             {/* <Filter /> */}
             
             {/* <Text style={styles.welcome}>Welcome to React Native!</Text> */}

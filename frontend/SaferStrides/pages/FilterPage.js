@@ -1,46 +1,33 @@
 import React, {Component} from 'react';
-import {Modal, Text, TouchableHighlight, View, Alert} from 'react-native';
+import {Modal, Text, TouchableHighlight, View, Button, Alert, StyleSheet} from 'react-native';
+import ToggleSwitch from 'toggle-switch-react-native';
 
 export default class FilterPage extends Component {
-  state = {
-    modalVisible: false,
-  };
-
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
-
+    constructor(props) {
+        super(props);
+    }
   render() {
     return (
       <View style={{marginTop: 22}}>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}>
-          <View style={{marginTop: 22}}>
-            <View>
-              <Text>Hello World!</Text>
-
-              <TouchableHighlight
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
+        <View style={styles.optionsButton}>
+              <Button title="Back" onPress={() => this.props.nextPage(2)}></Button>
             </View>
-          </View>
-        </Modal>
 
-        <TouchableHighlight
-          onPress={() => {
-            this.setModalVisible(true);
-          }}>
-          <Text>Show Modal</Text>
-        </TouchableHighlight>
+        <text>Heat Map Display </text>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+    optionsButton:{
+      width: 100,
+      height: 10,
+      position: 'absolute',
+      bottom: 0,
+      right: 0,
+      top: 30,
+      color: "black",
+    }
+  }
+  );
