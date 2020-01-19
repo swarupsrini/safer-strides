@@ -19,7 +19,7 @@ export default class App extends Component {
 		super(props);
 
     this.state = {
-        step: 2,
+        step: 1,
     //   region: {
     //     latitude: LATITUDE,
     //     longitude: LONGITUDE,
