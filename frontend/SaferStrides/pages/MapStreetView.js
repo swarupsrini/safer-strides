@@ -10,6 +10,17 @@ const LONGITUDE = -79.347015;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
+const styles = StyleSheet.create({
+    scrollview: {
+      alignItems: 'center',
+      paddingVertical: 40,
+    },
+    map: {
+      width: width,
+      height: height,
+    },
+  });
+
 export default class MapStreetView extends Component {
     constructor(props) {
         this.state = {
@@ -24,7 +35,6 @@ export default class MapStreetView extends Component {
     render() {
         return (
             <View>
-              
             <MapView
                 provider={this.props.provider}
                 style={styles.map}
@@ -43,14 +53,3 @@ export default class MapStreetView extends Component {
         );
       }
     }
-
-const styles = StyleSheet.create({
-  scrollview: {
-    alignItems: 'center',
-    paddingVertical: 40,
-  },
-  map: {
-    width: width,
-    height: height,
-  },
-});
