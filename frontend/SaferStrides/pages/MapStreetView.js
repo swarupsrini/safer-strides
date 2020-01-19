@@ -36,7 +36,7 @@ export default class MapStreetView extends Component {
     render() {
         return (
             <View>
-            {/* <MapView
+            <MapView
                 provider={this.props.provider}
                 style={styles.map}
                 scrollEnabled={true}
@@ -54,7 +54,7 @@ export default class MapStreetView extends Component {
               strokeWidth={2}
               />
             </MapView>
-            {/* <Filter /> */}
+            {/* <Filter />
             
             {/* <Text style={styles.welcome}>Welcome to React Native!</Text> */}
             {/* <GetLocationButton onGetLocation={this.sendUserLocation} /> */}
