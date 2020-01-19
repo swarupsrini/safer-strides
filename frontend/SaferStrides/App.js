@@ -10,12 +10,6 @@ const LONGITUDE = -79.347015;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' + 'Shake or press menu button for dev menu',
-});
-
 export default class App extends Component {
   constructor(props) {
     super(props);
