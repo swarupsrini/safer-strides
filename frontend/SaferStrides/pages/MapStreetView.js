@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Dimensions } from 'react-native';
+import { Platform, StyleSheet, Text, View, Dimensions, StatusBar } from 'react-native';
 // import GetLocationButton from './pages/GetLocationButton';
 import MapView from 'react-native-maps';
 
@@ -9,17 +9,6 @@ const LATITUDE = 43.651070;
 const LONGITUDE = -79.347015;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-
-const styles = StyleSheet.create({
-    scrollview: {
-      alignItems: 'center',
-      paddingVertical: 40,
-    },
-    map: {
-      width: width,
-      height: height,
-    },
-  });
 
 export default class MapStreetView extends Component {
     constructor(props) {
@@ -54,3 +43,11 @@ export default class MapStreetView extends Component {
         );
       }
     }
+
+    const styles = StyleSheet.create({
+        map: {
+            width: width,
+            height: height,
+            top: StatusBar.currentHeight,
+        },
+      });
