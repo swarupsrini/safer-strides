@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 23596,
+  "packagerPort": null,
+  "packagerPid": null,
   "expoServerNgrokUrl": "https://e6-qvb.anonymous.saferstrides.exp.direct",
   "packagerNgrokUrl": "https://packager.e6-qvb.anonymous.saferstrides.exp.direct",
-  "ngrokPid": 39040
+  "ngrokPid": 34000
 }

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Modal, Text, TouchableHighlight, View, Button, Alert, StyleSheet} from 'react-native';
-import ToggleSwitch from 'toggle-switch-react-native';
-
+import Filter from '../components/Filter';
 export default class FilterPage extends Component {
     constructor(props) {
         super(props);
@@ -12,8 +11,14 @@ export default class FilterPage extends Component {
         <View style={styles.optionsButton}>
               <Button title="Back" onPress={() => this.props.nextPage(2)}></Button>
             </View>
+            <Filter />
+            <Filter />
+            <Filter />
+            <Filter />
 
-        <text>Heat Map Display </text>
+            <View style={styles.middy}>        
+                <Text style={styles.headTitle}> Heat Map Display </Text>
+            </View>
       </View>
     );
   }
@@ -28,6 +33,18 @@ const styles = StyleSheet.create({
       right: 0,
       top: 30,
       color: "black",
+    },
+    headTitle:{
+        color: 'black',
+        fontSize: 40,
+        fontFamily: '',
+        textAlign: 'center',
+        fontWeight: 'bold',
+    },
+    middy:{
+        position: "absolute",
+        top: 100,
+        right: 50,
     }
   }
   );
