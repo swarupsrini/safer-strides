@@ -3,12 +3,10 @@ import { Platform, StyleSheet, Text, View, Dimensions, StatusBar, Button } from 
 import axios from 'axios';
 
 import FilterPage from './FilterPage';
+import SearchBar from 'react-native-searchbar';
 
-import MapView, {
-  Circle
-} from 'react-native-maps';
+import MapView, { Circle } from 'react-native-maps';
 
-import Filter from '../components/Filter';
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width/height ;
 const LATITUDE = 43.651070;
@@ -22,6 +20,29 @@ const circle = {
   },
   radius: 700,
 };
+const items = [
+  1337,
+  'janeway',
+  {
+    lots: 'of',
+    different: {
+      types: 0,
+      data: false,
+      that: {
+        can: {
+          be: {
+            quite: {
+              complex: {
+                hidden: [ 'gold!' ],
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  [ 4, 2, 'tree' ],
+];
 
 export default class MapStreetView extends Component {
     constructor(props) {
@@ -36,52 +57,8 @@ export default class MapStreetView extends Component {
         };
     }
 
-    // createMap = () => {
-    //     const data = [{"lat":43.6706216,"lng":-79.3865296,"color":"#ffff00"},{"lat":43.7756926,"lng":-79.2210486,"color":"#ffff00"},{"lat":43.7474687,"lng":-79.4826496,"color":"#ffff00"},{"lat":43.4848578,"lng":-80.5503174,"color":"#ffff00"},{"lat":43.7668246,"lng":-79.4259037,"color":"#ffff00"},{"lat":43.461165,"lng":-80.538334,"color":"#ffff00"},{"lat":43.7290853,"lng":-79.4489454,"color":"#ffff00"},{"lat":43.7774174,"lng":-79.4746882,"color":"#ffff00"},{"lat":43.6718051,"lng":-79.3846172,"color":"#ffff00"},{"lat":43.4977771,"lng":-80.5077565,"color":"#ffff00"},{"lat":43.6464714,"lng":-79.4037161,"color":"#ffff00"},{"lat":43.6572984,"lng":-79.3843645,"color":"#ffff00"},{"lat":43.266216,"lng":-79.9985841,"color":"#ffff00"},{"lat":43.696131,"lng":-79.3697946,"color":"#ffff00"},{"lat":43.7261027,"lng":-79.3134581,"color":"#ffff00"},{"lat":43.4746742,"lng":-80.5908538,"color":"#ffff00"},{"lat":43.6723558,"lng":-79.3768515,"color":"#ffff00"},{"lat":43.783594,"lng":-79.2993322,"color":"#ffff00"},{"lat":43.9077536,"lng":-80.0932257,"color":"#ffff00"},{"lat":43.4467221,"lng":-80.4873602,"color":"#ffff00"},{"lat":43.6618723,"lng":-79.3793473,"color":"#ffff00"},{"lat":43.659884,"lng":-79.390349,"color":"#ffff00"},{"lat":43.6798316,"lng":-79.3221352,"color":"#ffff00"},{"lat":43.707705,"lng":-79.3311829,"color":"#ff0000"},{"lat":43.7411347,"lng":-79.3322581,"color":"#ffff00"},{"lat":43.7414958,"lng":-79.3200497,"color":"#ffff00"},{"lat":43.6820237,"lng":-79.3297679,"color":"#ffff00"},{"lat":43.2945449,"lng":-79.8649755,"color":"#ffff00"},{"lat":43.6864325,"lng":-79.3003283,"color":"#ffff00"},{"lat":43.6869517,"lng":-79.3073413,"color":"#ffff00"},{"lat":43.7447846,"lng":-79.2447319,"color":"#ffff00"},{"lat":43.4984806,"lng":-80.5243505,"color":"#ffff00"},{"lat":43.6746978,"lng":-79.3965732,"color":"#ffff00"},{"lat":43.692745,"lng":-79.565842,"color":"#ffff00"},{"lat":43.686461,"lng":-79.602192,"color":"#ffff00"},{"lat":43.6916848,"lng":-79.5708353,"color":"#ffff00"},{"lat":43.799454,"lng":-79.354036,"color":"#ffff00"},{"lat":43.736626,"lng":-79.343445,"color":"#ffff00"},{"lat":43.6947588,"lng":-79.3431193,"color":"#ffff00"},{"lat":43.837853,"lng":-79.4819486,"color":"#ffff00"},{"lat":43.837853,"lng":-79.4819486,"color":"#ffff00"},{"lat":43.657703,"lng":-79.515877,"color":"#ffff00"},{"lat":43.6572918,"lng":-79.3734506,"color":"#ffff00"},{"lat":43.6581648,"lng":-79.3724019,"color":"#ffff00"},{"lat":43.1881745,"lng":-80.3836227,"color":"#ffff00"},{"lat":43.6588971,"lng":-79.3365895,"color":"#ffff00"},{"lat":43.725772,"lng":-79.3164526,"color":"#ffff00"},{"lat":43.763438,"lng":-79.2913587,"color":"#ffff00"},{"lat":43.6393584,"lng":-79.5647963,"color":"#ffff00"},{"lat":43.6398899,"lng":-79.4110984,"color":"#ffff00"},{"lat":43.1535809,"lng":-80.724761,"color":"#ffff00"},{"lat":43.6382232,"lng":-79.4488251,"color":"#ffff00"},{"lat":43.6382232,"lng":-79.4488251,"color":"#ffff00"},{"lat":43.6382232,"lng":-79.4488251,"color":"#ffff00"},{"lat":43.6382232,"lng":-79.4488251,"color":"#ffff00"},{"lat":43.6382232,"lng":-79.4488251,"color":"#ffff00"},{"lat":43.6584927,"lng":-79.3848544,"color":"#ffff00"},{"lat":43.7682775,"lng":-79.5229504,"color":"#ffff00"},{"lat":43.662264,"lng":-79.405996,"color":"#ffff00"},{"lat":43.6396236,"lng":-79.3795849,"color":"#ffff00"},{"lat":43.6598064,"lng":-79.4926851,"color":"#ffff00"},{"lat":43.6816794,"lng":-79.4261989,"color":"#ffff00"},{"lat":43.7266633,"lng":-79.5606019,"color":"#ffff00"},{"lat":43.7266633,"lng":-79.5606019,"color":"#ffff00"},{"lat":43.7266633,"lng":-79.5606019,"color":"#ffff00"},{"lat":43.5219748,"lng":-80.6549742,"color":"#ffff00"},{"lat":43.6772126,"lng":-79.4961735,"color":"#ffff00"},{"lat":43.6597077,"lng":-79.3755739,"color":"#ffff00"},{"lat":43.863707,"lng":-79.514399,"color":"#ffff00"},{"lat":43.863707,"lng":-79.514399,"color":"#ffff00"},{"lat":43.6654098,"lng":-79.4645433,"color":"#ffff00"},{"lat":43.4401443,"lng":-80.4809436,"color":"#ffff00"},{"lat":43.636631,"lng":-79.4415691,"color":"#ffff00"},{"lat":43.6491589,"lng":-79.3778922,"color":"#ffff00"},{"lat":43.2237667,"lng":-79.6354045,"color":"#ffff00"},{"lat":43.2237667,"lng":-79.6354045,"color":"#ffff00"},{"lat":43.7218801,"lng":-79.2363259,"color":"#ffff00"},{"lat":43.6382232,"lng":-79.4488251,"color":"#ffff00"},{"lat":43.5954363,"lng":-79.5055993,"color":"#ffff00"},{"lat":43.761924,"lng":-79.215844,"color":"#ffff00"},{"lat":43.7632961,"lng":-79.2088147,"color":"#ffff00"},{"lat":43.7552911,"lng":-79.2467449,"color":"#ffff00"},{"lat":43.6808178,"lng":-79.4826183,"color":"#ffff00"},{"lat":43.6465867,"lng":-79.3702547,"color":"#ffff00"},{"lat":43.8207722,"lng":-79.2463189,"color":"#ffff00"},{"lat":43.8207722,"lng":-79.2463189,"color":"#ffff00"},{"lat":43.781712,"lng":-79.2339202,"color":"#ffff00"},{"lat":43.5190882,"lng":-80.5422381,"color":"#ffff00"},{"lat":44.0110599,"lng":-79.3155967,"color":"#ffff00"},{"lat":43.8098614,"lng":-79.2576443,"color":"#ffff00"},{"lat":43.8037432,"lng":-79.2862894,"color":"#ffff00"},{"lat":43.8259409,"lng":-79.2972829,"color":"#ffff00"},{"lat":43.7879933,"lng":-79.2083382,"color":"#ffff00"},{"lat":43.7928371,"lng":-79.195935,"color":"#ff0000"},{"lat":43.7928371,"lng":-79.195935,"color":"#ffff00"},{"lat":43.707705,"lng":-79.3311829,"color":"#ffff00"},{"lat":43.707705,"lng":-79.3311829,"color":"#ffff00"},{"lat":43.7687665,"lng":-79.4130269,"color":"#ffff00"},{"lat":43.6985901,"lng":-79.3255231,"color":"#ffff00"},{"lat":43.6947588,"lng":-79.3431193,"color":"#ffff00"},{"lat":43.6949906,"lng":-79.4418156,"color":"#ffff00"},{"lat":43.6779934,"lng":-79.4352319,"color":"#ffff00"},{"lat":43.6926349,"lng":-79.4408167,"color":"#ffff00"},{"lat":43.6302408,"lng":-79.7220799,"color":"#ffff00"},{"lat":43.6457231,"lng":-79.4005884,"color":"#ffff00"},{"lat":43.7734744,"lng":-79.3896342,"color":"#ffff00"},{"lat":43.7789414,"lng":-79.2568878,"color":"#ffff00"},{"lat":43.4454513,"lng":-80.4936515,"color":"#ffff00"},{"lat":43.6594099,"lng":-79.3474226,"color":"#ffff00"},{"lat":43.4454513,"lng":-80.4936515,"color":"#ffff00"},{"lat":43.6818528,"lng":-79.4676965,"color":"#ffff00"},{"lat":43.7225941,"lng":-79.4142334,"color":"#ffff00"},{"lat":43.6511421,"lng":-79.4762591,"color":"#ffff00"},{"lat":43.707705,"lng":-79.3311829,"color":"#ffff00"},{"lat":43.6968635,"lng":-79.8297731,"color":"#ffff00"},{"lat":43.6968635,"lng":-79.8297731,"color":"#ffff00"},{"lat":43.7738071,"lng":-79.3532775,"color":"#ffff00"},{"lat":43.7554798,"lng":-79.4385257,"color":"#ffff00"},{"lat":43.7378239,"lng":-79.52013,"color":"#ffff00"},{"lat":43.7852895,"lng":-79.2786386,"color":"#ffff00"},{"lat":43.7946606,"lng":-79.2349784,"color":"#ffff00"},{"lat":43.73727,"lng":-79.522348,"color":"#ffff00"},{"lat":43.7853173,"lng":-79.2785015,"color":"#ffff00"},{"lat":43.7474687,"lng":-79.4826496,"color":"#ffff00"},{"lat":43.6527581,"lng":-79.398087,"color":"#ffff00"},{"lat":43.6807093,"lng":-79.4307402,"color":"#ffff00"},{"lat":43.7141302,"lng":-79.2711119,"color":"#ffff00"},{"lat":43.716648,"lng":-79.260262,"color":"#ffff00"},{"lat":43.9120105,"lng":-79.4467502,"color":"#ffff00"},{"lat":43.6786021,"lng":-79.4397575,"color":"#ffff00"},{"lat":43.577719,"lng":-79.831102,"color":"#ffff00"},{"lat":43.6736208,"lng":-79.4708219,"color":"#ffff00"},{"lat":43.7225227,"lng":-79.3739578,"color":"#ffff00"},{"lat":43.7408283,"lng":-79.344323,"color":"#ffff00"},{"lat":43.6419537,"lng":-79.5578659,"color":"#ffff00"},{"lat":43.6263384,"lng":-79.502609,"color":"#ffff00"},{"lat":43.631195,"lng":-79.478508,"color":"#ffff00"},{"lat":43.7608211,"lng":-79.4855435,"color":"#ffff00"},{"lat":43.6694459,"lng":-79.4691475,"color":"#ffff00"},{"lat":43.695226,"lng":-79.487647,"color":"#ffff00"},{"lat":43.7519174,"lng":-79.5163825,"color":"#ffff00"},{"lat":43.7201217,"lng":-79.4409978,"color":"#ffff00"},{"lat":43.7368051,"lng":-79.307634,"color":"#ffff00"},{"lat":43.4383414,"lng":-80.5240657,"color":"#ffff00"},{"lat":43.4383414,"lng":-80.5240657,"color":"#ffff00"},{"lat":43.4383414,"lng":-80.5240657,"color":"#ffff00"},{"lat":43.7727093,"lng":-79.3207105,"color":"#ffff00"},{"lat":43.7273999,"lng":-79.4877113,"color":"#ffff00"},{"lat":43.9849471,"lng":-79.3613888,"color":"#ffff00"},{"lat":43.4802379,"lng":-80.5030992,"color":"#ffff00"},{"lat":43.4802379,"lng":-80.5030992,"color":"#ffff00"},{"lat":43.4783164,"lng":-80.5115226,"color":"#ffff00"},{"lat":43.7428815,"lng":-79.4859941,"color":"#ffff00"},{"lat":43.4532192,"lng":-80.4905658,"color":"#ffff00"},{"lat":43.4532192,"lng":-80.4905658,"color":"#ffff00"},{"lat":43.4532192,"lng":-80.4905658,"color":"#ffff00"},{"lat":43.4532192,"lng":-80.4905658,"color":"#ffff00"},{"lat":43.4532192,"lng":-80.4905658,"color":"#ffff00"},{"lat":43.4532192,"lng":-80.4905658,"color":"#ffff00"},{"lat":43.664929,"lng":-79.3845625,"color":"#ffff00"},{"lat":43.7440969,"lng":-79.4066275,"color":"#ffff00"},{"lat":43.456021,"lng":-80.5171116,"color":"#ffff00"}]
-        
-    //     map = <View>
-    //         <MapView
-    //             provider={this.props.provider}
-    //             style={styles.map}
-    //             scrollEnabled={true}
-    //             zoomEnabled={true}
-    //             pitchEnabled={true}
-    //             rotateEnabled={true}
-    //             initialRegion={this.state.region}
-    //             >
-    //           <Circle
-    //           center={circle.center}
-    //           radius={circle.radius}
-    //           fillColor="rgba(255,0,0,0.5)"
-    //           strokeColor="rgba(0,0,0,0.5)"
-    //           zIndex={2}
-    //           strokeWidth={2}
-    //           />
-    //         </MapView>
-            
-    //         <View style={styles.optionsButton}>
-    //           <Button title="Options" onPress={() => this.props.nextPage(4)}></Button>
-    //         </View>
-
-    //         {/* <FilterPage > </FilterPage> */}
-    //         {/* <Filter /> */}
-            
-    //         {/* <Text style={styles.welcome}>Welcome to React Native!</Text> */}
-    //         {/* <GetLocationButton onGetLocation={this.sendUserLocation} /> */}
-    //         {/* <Text style={styles.instructions}>{instructions}</Text> */}
-    //       </View>
-
-    //     //   data.forEach(d => {
-
-    //     //   });
-
-    //       return map
-
-    // }
-
     render() {
-        return (
-            <View> 
+        return (<View>
             <MapView
                 provider={this.props.provider}
                 style={styles.map}
@@ -91,1150 +68,1149 @@ export default class MapStreetView extends Component {
                 rotateEnabled={true}
                 initialRegion={this.state.region}
                 >
-              <Circle
-              center={circle.center}
-              radius={circle.radius}
-              fillColor="rgba(255,0,0,0.5)"
-              strokeColor="rgba(0,0,0,0.5)"
+            <Circle
+              center={{latitude: 43.6706216, longitude: -79.3865296}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7756926, longitude: -79.2210486}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7474687, longitude: -79.4826496}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4848578, longitude: -80.5503174}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7668246, longitude: -79.4259037}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.461165, longitude: -80.538334}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7290853, longitude: -79.4489454}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7774174, longitude: -79.4746882}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6718051, longitude: -79.3846172}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4977771, longitude: -80.5077565}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6464714, longitude: -79.4037161}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6572984, longitude: -79.3843645}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.266216, longitude: -79.9985841}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.696131, longitude: -79.3697946}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7261027, longitude: -79.3134581}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4746742, longitude: -80.5908538}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6723558, longitude: -79.3768515}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.783594, longitude: -79.2993322}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.9077536, longitude: -80.0932257}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4467221, longitude: -80.4873602}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6618723, longitude: -79.3793473}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.659884, longitude: -79.390349}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6798316, longitude: -79.3221352}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.707705, longitude: -79.3311829}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ff0000"
-              strokeColor="#ff0000"
+              center={{latitude: 43.7411347, longitude: -79.3322581}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7414958, longitude: -79.3200497}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6820237, longitude: -79.3297679}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.2945449, longitude: -79.8649755}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6864325, longitude: -79.3003283}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6869517, longitude: -79.3073413}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7447846, longitude: -79.2447319}}
+              radius={100}
+              fillColor='ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4984806, longitude: -80.5243505}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6746978, longitude: -79.3965732}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.692745, longitude: -79.565842}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.686461, longitude: -79.602192}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6916848, longitude: -79.5708353}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.799454, longitude: -79.354036}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.736626, longitude: -79.343445}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6947588, longitude: -79.3431193}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.837853, longitude: -79.4819486}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.837853, longitude: -79.4819486}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.657703, longitude: -79.515877}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6572918, longitude: -79.3734506}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6581648, longitude: -79.3724019}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.1881745, longitude: -80.3836227}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6588971, longitude: -79.3365895}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.725772, longitude: -79.3164526}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.763438, longitude: -79.2913587}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6393584, longitude: -79.5647963}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6398899, longitude: -79.4110984}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.1535809, longitude: -80.724761}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6382232, longitude: -79.4488251}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6382232, longitude: -79.4488251}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6382232, longitude: -79.4488251}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6382232, longitude: -79.4488251}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6382232, longitude: -79.4488251}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6584927, longitude: -79.3848544}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7682775, longitude: -79.5229504}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.662264, longitude: -79.405996}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6396236, longitude: -79.3795849}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6598064, longitude: -79.4926851}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6816794, longitude: -79.4261989}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7266633, longitude: -79.5606019}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7266633, longitude: -79.5606019}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7266633, longitude: -79.5606019}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.5219748, longitude: -80.6549742}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6772126, longitude: -79.4961735}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6597077, longitude: -79.3755739}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.863707, longitude: -79.514399}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.863707, longitude: -79.514399}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6654098, longitude: -79.4645433}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4401443, longitude: -80.4809436}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.636631, longitude: -79.4415691}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6491589, longitude: -79.3778922}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.2237667, longitude: -79.6354045}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.2237667, longitude: -79.6354045}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7218801, longitude: -79.2363259}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6382232, longitude: -79.4488251}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.5954363, longitude: -79.5055993}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.761924, longitude: -79.215844}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7632961, longitude: -79.2088147}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7552911, longitude: -79.2467449}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6808178, longitude: -79.4826183}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6465867, longitude: -79.3702547}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.8207722, longitude: -79.2463189}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.8207722, longitude: -79.2463189}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.781712, longitude: -79.2339202}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.5190882, longitude: -80.5422381}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 44.0110599, longitude: -79.3155967}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.8098614, longitude: -79.2576443}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.8037432, longitude: -79.2862894}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.8259409, longitude: -79.2972829}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7879933, longitude: -79.2083382}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7928371, longitude: -79.195935}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ff0000"
-              strokeColor="#ff0000"
+              center={{latitude: 43.7928371, longitude: -79.195935}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.707705, longitude: -79.3311829}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.707705, longitude: -79.3311829}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7687665, longitude: -79.4130269}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6985901, longitude: -79.3255231}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6947588, longitude: -79.3431193}}
+              radius={100}
+              fillColor='#ff0000'
+              strokeColor='#ff0000'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6949906, longitude: -79.4418156}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6779934, longitude: -79.4352319}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6926349, longitude: -79.4408167}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6302408, longitude: -79.7220799}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6457231, longitude: -79.4005884}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7734744, longitude: -79.3896342}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7789414, longitude: -79.2568878}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4454513, longitude: -80.4936515}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6594099, longitude: -79.3474226}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4454513, longitude: -80.4936515}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6818528, longitude: -79.4676965}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7225941, longitude: -79.4142334}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6511421, longitude: -79.4762591}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.707705, longitude: -79.3311829}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6968635, longitude: -79.8297731}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6968635, longitude: -79.8297731}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7738071, longitude: -79.3532775}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7554798, longitude: -79.4385257}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7378239, longitude: -79.52013}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7852895, longitude: -79.2786386}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7946606, longitude: -79.2349784}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.73727, longitude: -79.522348}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7853173, longitude: -79.2785015}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7474687, longitude: -79.4826496}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6527581, longitude: -79.398087}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6807093, longitude: -79.4307402}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7141302, longitude: -79.2711119}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.716648, longitude: -79.260262}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.9120105, longitude: -79.4467502}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6786021, longitude: -79.4397575}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.577719, longitude: -79.831102}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6736208, longitude: -79.4708219}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7225227, longitude: -79.3739578}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7408283, longitude: -79.344323}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6419537, longitude: -79.5578659}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6263384, longitude: -79.502609}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.631195, longitude: -79.478508}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7608211, longitude: -79.4855435}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.6694459, longitude: -79.4691475}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.695226, longitude: -79.487647}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7519174, longitude: -79.5163825}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7201217, longitude: -79.4409978}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7368051, longitude: -79.307634}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4383414, longitude: -80.5240657}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4383414, longitude: -80.5240657}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4383414, longitude: -80.5240657}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7727093, longitude: -79.3207105}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7273999, longitude: -79.4877113}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.9849471, longitude: -79.3613888}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4802379, longitude: -80.5030992}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4802379, longitude: -80.5030992}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4783164, longitude: -80.5115226}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7428815, longitude: -79.4859941}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4532192, longitude: -80.4905658}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4532192, longitude: -80.4905658}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4532192, longitude: -80.4905658}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4532192, longitude: -80.4905658}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4532192, longitude: -80.4905658}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.4532192, longitude: -80.4905658}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.664929, longitude: -79.3845625}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.7440969, longitude: -79.4066275}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
-              zIndex={2}
-              strokeWidth={2}
-              /><Circle
-              center={{latitude: d.lat, longitude: d.lng}}
-              radius={50}
-              fillColor="#ffff00"
-              strokeColor="#ffff00"
+              center={{latitude: 43.456021, longitude: -80.5171116}}
+              radius={100}
+              fillColor='#ffff00'
+              strokeColor='#ffff00'
               zIndex={2}
               strokeWidth={2}
               />
             </MapView>
-            </View>
+            <SearchBar
+                ref={(ref) => this.searchBar = ref}
+                data={items}
+                handleResults={this._handleResults}
+                showOnLoad
+                />
+        </View>
         );
       }
     }
@@ -1252,7 +1228,7 @@ export default class MapStreetView extends Component {
           position: 'absolute',
           bottom: 0,
           right: 0,
-          top: 30,
+          top: 65,
         }
       }
       );

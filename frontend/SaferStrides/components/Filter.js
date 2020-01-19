@@ -4,18 +4,35 @@ import {ScrollView, Text, View, StyleSheet} from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 
 export default class Filter extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {switchValue:true};
+  }
+  //   toggleSwitch = (value) => {
+  //     //onValueChange of the switch this function will be called
+  //     this.setState({switchValue: value})
+  //     //state changes according to switch
+  //     //which will result in re-render the text
+  //  }
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.headTitle}>Title </Text>
+        <View style={styles.bbb}>
         <ToggleSwitch
-            isOn={false}
+            isOn={this.state.switchValue}
             onColor="green"
             offColor="red"
-            label="Example label"
-            labelStyle={{ color: "black", fontWeight: "900" }}
+            label="Option A"
+            labelStyle={{ color: "black", fontWeight: "bold", fontSize: 50 }}
             size="large"
-            onToggle={isOn => console.log("changed to : ", isOn)}
+            onToggle={(switchValue) =>{
+              this.setState({switchValue});
+              console.log(switchValue);
+            }}
         />
+        </View>
+        
       </View>
     );
   }
@@ -47,4 +64,16 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  headTitle:{
+    color: 'gray',
+    fontSize: 20,
+    fontFamily: '',
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  bbb:{
+    position: "absolute",
+        top: 200,
+        right: 60,
+  }
 });
