@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View, Dimensions } from 'react-native';
 import GetLocationButton from './components/GetLocationButton';
+import MapView from 'react-native-maps';
+const { width, height } = Dimensions.get('window');
+
+const ASPECT_RATIO = width/height ;
+const LATITUDE = 43.651070;
+const LONGITUDE = -79.347015;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 
 const instructions = Platform.select({
@@ -9,37 +17,51 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      region: {
+        latitude: LATITUDE,
+        longitude: LONGITUDE,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA,
+      },
+    };
+  }
   sendUserLocation = () => {
     console.log('Pressed button')
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
+      <View>
+      <MapView
+            provider={this.props.provider}
+            style={styles.map}
+            scrollEnabled={true}
+            zoomEnabled={true}
+            pitchEnabled={true}
+            rotateEnabled={true}
+            initialRegion={this.state.region}
+          >
+          </MapView>   
+        
+        {/* <Text style={styles.welcome}>Welcome to React Native!</Text>
         <GetLocationButton onGetLocation={this.sendUserLocation} />
-        <Text style={styles.instructions}>{instructions}</Text>
+        <Text style={styles.instructions}>{instructions}</Text> */}
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
+  scrollview: {
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    paddingVertical: 40,
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  map: {
+    width: width,
+    height: height,
   },
 });
