@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Dimensions } from 'react-native';
-import GetLocationButton from './components/GetLocationButton';
+import GetLocationButton from './pages/GetLocationButton';
 import MapView from 'react-native-maps';
 const { width, height } = Dimensions.get('window');
 
