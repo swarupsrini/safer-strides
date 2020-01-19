@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Dimensions } from 'react-native';
+// import { Platform, StyleSheet, Text, View, Dimensions } from 'react-native';
 import Terms from './pages/Terms';
 import MapStreetView from './pages/MapStreetView';
 import MapHeat from './pages/MapHeat';
@@ -32,11 +32,16 @@ export default class App extends Component {
 //     console.log('Pressed button')
 //   }
 
+  changePage = (step) => {
+      this.setState({step: step});
+      print(this.state);
+  }
+
   render() {
     const { step } = this.state;
     switch(step) {
         case 1:
-            return (<Terms />);
+            return (<Terms changePage={this.changePage}/>);
         case 2:
             return (<MapStreetView />);
         case 3:
@@ -65,13 +70,13 @@ export default class App extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  scrollview: {
-    alignItems: 'center',
-    paddingVertical: 40,
-  },
-  map: {
-    width: width,
-    height: height,
-  },
-});
+// const styles = StyleSheet.create({
+//   scrollview: {
+//     alignItems: 'center',
+//     paddingVertical: 40,
+//   },
+//   map: {
+//     width: width,
+//     height: height,
+//   },
+// });
