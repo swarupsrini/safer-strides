@@ -2,16 +2,8 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-<<<<<<< HEAD
-  "packagerPid": 13876,
+  "packagerPid": 24412,
   "expoServerNgrokUrl": "https://7i-qgv.anonymous.saferstrides.exp.direct",
   "packagerNgrokUrl": "https://packager.7i-qgv.anonymous.saferstrides.exp.direct",
-  "ngrokPid": 16416,
-=======
-  "packagerPid": 16388,
-  "expoServerNgrokUrl": "https://tx-vyx.anonymous.saferstrides.exp.direct",
-  "packagerNgrokUrl": "https://packager.tx-vyx.anonymous.saferstrides.exp.direct",
-  "ngrokPid": 10072,
->>>>>>> fd9d2219e95dd52adbae26ca72883ef484c116ca
-  "webpackServerPort": 19006
+  "ngrokPid": 3148
 }

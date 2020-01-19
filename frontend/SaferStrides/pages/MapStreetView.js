@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Dimensions, StatusBar } from 'react-native';
 // import GetLocationButton from './pages/GetLocationButton';
+
+import LocationView from '../components/LocationView'
 import MapView from 'react-native-maps';
 
 const { width, height } = Dimensions.get('window');
@@ -25,7 +27,7 @@ export default class MapStreetView extends Component {
     render() {
         return (
             <View>
-            <MapView
+            {/* <MapView
                 provider={this.props.provider}
                 style={styles.map}
                 scrollEnabled={true}
@@ -34,7 +36,9 @@ export default class MapStreetView extends Component {
                 rotateEnabled={true}
                 initialRegion={this.state.region}
                 >
-            </MapView>   
+            </MapView>    */}
+
+            <LocationView />
             
             {/* <Text style={styles.welcome}>Welcome to React Native!</Text> */}
             {/* <GetLocationButton onGetLocation={this.sendUserLocation} /> */}
