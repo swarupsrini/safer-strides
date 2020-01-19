@@ -36,7 +36,7 @@ export default class MapStreetView extends Component {
     render() {
         return (
             <View>
-            <MapView
+            {/* <MapView
                 provider={this.props.provider}
                 style={styles.map}
                 scrollEnabled={true}
