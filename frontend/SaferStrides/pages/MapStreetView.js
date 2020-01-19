@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
 
 export default class MapStreetView extends Component {
     constructor(props) {
+        super(props);
         this.state = {
           region: {
             latitude: LATITUDE,
