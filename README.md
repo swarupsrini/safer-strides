@@ -1,5 +1,5 @@
-"# safer-strides" 
-NEED TO HAVE: Expo app installed on android/ios phone
+# safer-strides
+A mobile app that allows you to view ongoing and past crime reports built by scraping the official Toronto Police twitter page into heatmaps.
 
 1. cd frontend/SaferStrides
 2. expo start
