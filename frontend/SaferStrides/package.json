@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@react-native-community/geolocation": "^2.0.2",
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "expo": "~36.0.0",
     "link": "^0.1.5",
     "react": "~16.9.0",
